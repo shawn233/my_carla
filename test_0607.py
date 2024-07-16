@@ -61,7 +61,7 @@ def spawn_vehicles(client,world, bp_lib, traffic_manager, vehicles_list):
                 .then(carla.command.SetAutopilot(carla.command.FutureActor, True, traffic_manager.get_port())))
             
         previous_x = x
-            
+
     responses = client.apply_batch_sync(batch, True)
             
     for response in responses:
@@ -146,7 +146,6 @@ def spawn_walkers(client, world, bp_lib, vehicles_list, walkers_list, all_id):
     # set how many pedestrians can cross the road
     world.set_pedestrians_cross_factor(percentagePedestriansCrossing)
     for i in range(0, len(all_id), 2):
-        input()
         # start walker
         all_actors[i].start()
         # set walk to random point
@@ -265,7 +264,9 @@ def main():
     client = carla.Client('localhost', 2000)
     client.set_timeout(CLIENT_TIMEOUT)
     world = client.load_world('Town03')
-    #world = client.get_world()
+    # if world is None:
+    #     world = client.get_world()
+    print('world', world)
     bp_lib = world.get_blueprint_library()
 
     traffic_manager = client.get_trafficmanager(8000)
